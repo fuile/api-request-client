@@ -1,16 +1,22 @@
-/*
- * +---------------------------------------------------------
- * | Author Jared.Yan<yanhuaiwen@163.com>
- * +---------------------------------------------------------
- * | Copyright (c) http://cmsen.com All rights reserved.
- * +---------------------------------------------------------
- */
-package cn.databytes.client;
+# API Request Client
 
-import org.junit.Test;
+### API
+
+```
+    RequestContext request = Client.request();
+    
+    ResponseContext response = request.get()
+    ResponseContext response = request.post()
+    ResponseContext response = request.put()
+    ResponseContext response = request.delete()
+    
+```
+
+### Usage
+
+```java
 
 public class ClientTest {
-
     @Test
     public void request() {
         RequestContext request = Client.request("api.weixin.qq.com");
@@ -23,7 +29,7 @@ public class ClientTest {
         request.setParam("grant_type", "authorization_code");
         ResponseContext response = request.get("/sns/jscode2session");
         response.debugMessage("小程序登录");
-        
+
         request.clearParam();
 
         // 下发小程序和公众号统一的服务消息
@@ -31,5 +37,5 @@ public class ClientTest {
         ResponseContext response2 = request.post("/cgi-bin/message/wxopen/template/uniform_send");
         response2.debugMessage("下发小程序和公众号统一的服务消息");
     }
-
 }
+```

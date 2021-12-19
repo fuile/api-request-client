@@ -119,7 +119,11 @@ public class ClientResponse implements ResponseContext {
     }
 
     public void debugMessage() {
-        System.out.println("\033[0;38m" + new String(new char[200]).replace("\0", "-") + "\033[0m");
+        debugMessage(null);
+    }
+
+    public void debugMessage(String name) {
+        System.out.println("\033[0;38m-------------------" + (name == null ? "--" : "  " + name) + "\033[0m");
         println(31, "       Thread name", Thread.currentThread().getName());
         println(31, "         Thread id", Thread.currentThread().getId());
         println(31, "   Local date time", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.SSS")));
@@ -129,6 +133,7 @@ public class ClientResponse implements ResponseContext {
         println(33, "      Request form", request.getForm());
         println(33, "      Request body", request.getBodyData());
         println(33, "  Request formData", request.getFormData());
+        println(33, "    Request method", request.getMethod());
         println(33, "Request target url", getRequestUrl());
         println(32, "     Response time", getResponseTime() + "ms");
         println(32, "   Response status", getStatus());
@@ -136,7 +141,11 @@ public class ClientResponse implements ResponseContext {
         println(32, "  Response headers", getHeaders());
         println(32, "  Response cookies", getCookies());
         println(32, "  Response context", getContent());
-        System.out.println("\033[0;38m" + new String(new char[200]).replace("\0", "-") + "\033[0m");
+        System.out.println("\033[0;38m-------------------\033[0m");
+    }
+
+    private String splitLine(int len) {
+        return new String(new char[len]).replace("\0", "-");
     }
 
     private void println(int color, String title, Object message) {

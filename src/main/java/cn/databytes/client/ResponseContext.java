@@ -35,4 +35,6 @@ public interface ResponseContext {
     long getResponseTime();
 
     void debugMessage();
+
+    void debugMessage(String name);
 }

@@ -348,7 +348,7 @@ public abstract class Request implements RequestConfig {
     }
 
     public void clearParam() {
-        this.cookie.clear();
+        this.param.clear();
     }
 
     public void clearStream() {
